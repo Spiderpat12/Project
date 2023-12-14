@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var cameraNode : Camera2D
+
 @export var Target : Node2D
 @export var followSpeed : float
 
