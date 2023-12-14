@@ -34,6 +34,9 @@ followSpeed = 5.0
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(650, 143)
 script = ExtResource("2_up1o3")
+speed = 400.0
+jump = 400.0
+gravit = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 modulate = Color(0, 0, 0, 1)

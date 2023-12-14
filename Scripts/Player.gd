@@ -9,7 +9,7 @@ func _physics_process(delta):
 	Gravity(delta)
 	
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump
+		velocity.y = -jump
 
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
@@ -22,4 +22,4 @@ func _physics_process(delta):
 
 func Gravity(delta) -> void:
 	if (!is_on_floor()):
-		velocity.y += gravit * delta
+		velocity.y += gravit
