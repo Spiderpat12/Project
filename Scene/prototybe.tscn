@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://5y35wg41apcu"]
+
+[ext_resource type="PackedScene" uid="uid://t43n82xr705q" path="res://Component/camera_node_component.tscn" id="1_pbv51"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_namwp"]
+size = Vector2(805, 127)
+
+[sub_resource type="QuadMesh" id="QuadMesh_gx3hd"]
+
+[node name="Proto" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(594, 292)
+scale = Vector2(1.48, 0.4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-8.5, -1.5)
+shape = SubResource("RectangleShape2D_namwp")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
+position = Vector2(-8.50002, -1.5)
+scale = Vector2(805, 127)
+mesh = SubResource("QuadMesh_gx3hd")
+
+[node name="CameraNode" parent="." node_paths=PackedStringArray("cameraNode", "Target") instance=ExtResource("1_pbv51")]
+cameraNode = NodePath("Camera2D")
+Target = NodePath("")
+followSpeed = 5.0
+
+[node name="Camera2D" type="Camera2D" parent="CameraNode"]
