@@ -28,13 +28,65 @@ position = Vector2(-8.50002, -1.5)
 scale = Vector2(805, 127)
 mesh = SubResource("QuadMesh_gx3hd")
 
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(594, 224)
+scale = Vector2(0.2, 0.159999)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-8.5, -1.5)
+shape = SubResource("RectangleShape2D_namwp")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D2"]
+position = Vector2(-8.50002, -1.5)
+scale = Vector2(805, 127)
+mesh = SubResource("QuadMesh_gx3hd")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(831, 177)
+scale = Vector2(0.2, 0.159999)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-8.5, -1.5)
+shape = SubResource("RectangleShape2D_namwp")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D3"]
+position = Vector2(-8.50002, -1.5)
+scale = Vector2(805, 127)
+mesh = SubResource("QuadMesh_gx3hd")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(1010, 242)
+scale = Vector2(0.2, 0.159999)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(-8.5, -1.5)
+shape = SubResource("RectangleShape2D_namwp")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D4"]
+position = Vector2(-8.50002, -1.5)
+scale = Vector2(805, 127)
+mesh = SubResource("QuadMesh_gx3hd")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(456, 139)
+scale = Vector2(0.2, 0.159999)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+position = Vector2(-8.5, -1.5)
+shape = SubResource("RectangleShape2D_namwp")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D5"]
+position = Vector2(-8.50002, -1.5)
+scale = Vector2(805, 127)
+mesh = SubResource("QuadMesh_gx3hd")
+
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(650, 143)
 script = ExtResource("2_up1o3")
-speed = 400.0
+speed = 225.0
 jump = 400.0
 gravit = 20.0
-acceleration = 1500.0
+acceleration = 900.0
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture_filter = 1
@@ -44,7 +96,14 @@ texture = ExtResource("3_4urei")
 position = Vector2(-1, 2)
 shape = SubResource("CapsuleShape2D_hcsv8")
 
+[node name="Timer_Node" type="Node" parent="Player"]
+
+[node name="CoyoteTimer" type="Timer" parent="Player/Timer_Node"]
+one_shot = true
+
 [node name="CameraComponent" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("3_fpoe7")]
 zoom = Vector2(3.5, 3.5)
 Target = NodePath("../Player")
 followSpeed = 7.0
+
+[connection signal="timeout" from="Player/Timer_Node/CoyoteTimer" to="Player" method="_on_coyote_timer_timeout"]

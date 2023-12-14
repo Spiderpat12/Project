@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+var coyoteTimer = 0.3
+var CanJump = false
+
 @export var speed : float
 @export var jump : float
 @export var gravit : float
@@ -28,5 +31,16 @@ func MoveMent(delta) -> void:
 
 
 func Jump() -> void:
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = -jump
+	
+	if is_on_floor() && CanJump == false:
+		CanJump = true
+	elif CanJump == true && $Timer_Node/CoyoteTimer.is_stopped():
+		$Timer_Node/CoyoteTimer.start(coyoteTimer)
+	
+	if CanJump:
+		if Input.is_action_just_pressed("ui_accept"):
+			velocity.y = -jump
+
+
+func _on_coyote_timer_timeout():
+	CanJump = false
