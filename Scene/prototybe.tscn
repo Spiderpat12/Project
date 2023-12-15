@@ -87,6 +87,7 @@ speed = 225.0
 jump = 400.0
 gravit = 20.0
 acceleration = 900.0
+Chapters = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 texture_filter = 1
@@ -101,9 +102,14 @@ shape = SubResource("CapsuleShape2D_hcsv8")
 [node name="CoyoteTimer" type="Timer" parent="Player/Timer_Node"]
 one_shot = true
 
+[node name="DashTimer" type="Timer" parent="Player/Timer_Node"]
+wait_time = 0.3
+one_shot = true
+
 [node name="CameraComponent" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("3_fpoe7")]
 zoom = Vector2(3.5, 3.5)
 Target = NodePath("../Player")
 followSpeed = 7.0
 
 [connection signal="timeout" from="Player/Timer_Node/CoyoteTimer" to="Player" method="_on_coyote_timer_timeout"]
+[connection signal="timeout" from="Player/Timer_Node/DashTimer" to="Player" method="_on_dash_timer_timeout"]
