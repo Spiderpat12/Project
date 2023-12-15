@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://5y35wg41apcu"]
+[gd_scene load_steps=8 format=3 uid="uid://5y35wg41apcu"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="2_up1o3"]
-[ext_resource type="Texture2D" uid="uid://cgpd835wsqyti" path="res://sprites/sds.png" id="3_4urei"]
+[ext_resource type="Texture2D" uid="uid://cwynrxrksge5x" path="res://sprites/sds.png" id="3_4urei"]
+[ext_resource type="Script" path="res://Scripts/DashNode.gd" id="3_a6ji2"]
 [ext_resource type="PackedScene" uid="uid://colhkjk7vslwt" path="res://Component/camera_component.tscn" id="3_fpoe7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_namwp"]
@@ -11,7 +12,7 @@ size = Vector2(805, 127)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hcsv8"]
 radius = 3.0
-height = 18.0
+height = 20.0
 
 [node name="Proto" type="Node2D"]
 
@@ -83,18 +84,18 @@ mesh = SubResource("QuadMesh_gx3hd")
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(650, 143)
 script = ExtResource("2_up1o3")
-speed = 225.0
+normalSpeed = 225.0
 jump = 400.0
 gravit = 20.0
 acceleration = 900.0
+divMul = 12
 Chapters = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture_filter = 1
 texture = ExtResource("3_4urei")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-1, 2)
+position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_hcsv8")
 
 [node name="Timer_Node" type="Node" parent="Player"]
@@ -102,9 +103,12 @@ shape = SubResource("CapsuleShape2D_hcsv8")
 [node name="CoyoteTimer" type="Timer" parent="Player/Timer_Node"]
 one_shot = true
 
-[node name="DashTimer" type="Timer" parent="Player/Timer_Node"]
-wait_time = 0.3
-one_shot = true
+[node name="Mechanics" type="Node" parent="Player"]
+
+[node name="DashNode" type="Node2D" parent="Player/Mechanics"]
+script = ExtResource("3_a6ji2")
+
+[node name="DashTimer" type="Timer" parent="Player/Mechanics/DashNode"]
 
 [node name="CameraComponent" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("3_fpoe7")]
 zoom = Vector2(3.5, 3.5)
@@ -112,4 +116,4 @@ Target = NodePath("../Player")
 followSpeed = 7.0
 
 [connection signal="timeout" from="Player/Timer_Node/CoyoteTimer" to="Player" method="_on_coyote_timer_timeout"]
-[connection signal="timeout" from="Player/Timer_Node/DashTimer" to="Player" method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Player/Mechanics/DashNode/DashTimer" to="Player/Mechanics/DashNode" method="_on_dash_timer_timeout"]
