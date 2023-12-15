@@ -3,7 +3,7 @@ extends CharacterBody2D
 var coyoteTimer : float = 0.3
 var CanJump : bool = false
 var dashSpeed : float
-var dashLenght = 0.2
+var dashLenght = 0.25
 
 
 @export var normalSpeed : float
@@ -19,6 +19,7 @@ func _ready():
 	dashSpeed = normalSpeed * divMul
 
 func _physics_process(delta):
+	print(normalSpeed)
 	Gravity(delta)
 	MoveMent(delta)
 	Jump()

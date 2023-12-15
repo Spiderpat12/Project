@@ -88,7 +88,7 @@ normalSpeed = 225.0
 jump = 400.0
 gravit = 20.0
 acceleration = 900.0
-divMul = 12
+divMul = 100
 Chapters = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
